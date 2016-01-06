@@ -2,15 +2,15 @@ package main
 
 import "fmt"
 
-func main(){
+func main() {
 	defer world()
 	hello()
 }
 
-func hello(){
+func hello() {
 	fmt.Print("Hello ")
 }
 
-func world(){
+func world() {
 	fmt.Println("world")
 }
