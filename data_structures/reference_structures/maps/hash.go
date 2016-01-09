@@ -1,10 +1,10 @@
 package main
 
-import(
+import (
 	"fmt"
-	"net/http"
 	"log"
-//	"io/ioutil"
+	"net/http"
+	//	"io/ioutil"
 	"bufio"
 	"os"
 )
@@ -15,20 +15,20 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	words:= make(map[string]string)
+	words := make(map[string]string)
 	sc := bufio.NewScanner(res.Body)
 	defer res.Body.Close()
 	sc.Split(bufio.ScanWords)
 	for sc.Scan() {
-		words[sc.Text()]=""
+		words[sc.Text()] = ""
 	}
 
-	if err:= sc.Err(); err!=nil{
-		fmt.Fprint(os.Stderr,"reading error", err)
+	if err := sc.Err(); err != nil {
+		fmt.Fprint(os.Stderr, "reading error", err)
 	}
 
-	i:=0
-	for f,_ := range words {
+	i := 0
+	for f, _ := range words {
 		fmt.Println(f)
 		if i > 200 {
 			break
@@ -37,5 +37,5 @@ func main() {
 	}
 	//bs, _ := ioutil.ReadAll(res.Body)
 	//str := string(bs)
-//	fmt.Println(str)
+	//	fmt.Println(str)
 }
