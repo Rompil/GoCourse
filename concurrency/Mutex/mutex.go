@@ -1,32 +1,32 @@
 package main
 
-import(
+import (
 	"fmt"
 	"sync"
 )
 
-type AtomicInt struct{
-	m sync.Mutex
+type AtomicInt struct {
+	m     sync.Mutex
 	value int
 }
 
-func (s *AtomicInt) Add (a int){
+func (s *AtomicInt) Add(a int) {
 	s.m.Lock()
-	s.value+=a
+	s.value += a
 	s.m.Unlock()
 }
 
-func (s AtomicInt) Value() int{
+func (s AtomicInt) Value() int {
 	s.m.Lock()
-	v:= s.value
+	v := s.value
 	s.m.Unlock()
 	return v
 }
 
 func Race() {
-	wait:= make(chan struct{})
+	wait := make(chan struct{})
 	var v AtomicInt
-	go func(){
+	go func() {
 		v.Add(1)
 		close(wait)
 	}()
@@ -35,6 +35,6 @@ func Race() {
 	fmt.Println(v.Value())
 }
 
-func main(){
+func main() {
 	Race()
 }

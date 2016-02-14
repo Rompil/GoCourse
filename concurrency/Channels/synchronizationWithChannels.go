@@ -17,7 +17,7 @@ func PublishNews(n string, delay time.Duration) (wait <-chan struct{}) { //empty
 
 func main() {
 	wait := PublishNews("Goroutine with the channel", 1*time.Second)
-	fmt.Print("Weiting for the news...\n")
+	fmt.Print("Waiting for the news...\n")
 	<-wait //channel carries signal
 	fmt.Print("Everithing is over...")
 }
